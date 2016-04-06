@@ -16,3 +16,7 @@ PHP Assessment for Try Catch
 
 4. Root
     * /index.php
+
+## Function
+
+##Installation
