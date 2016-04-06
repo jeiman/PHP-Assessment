@@ -3,7 +3,7 @@ PHP Assessment for Try Catch
 
 ## Structure
 
-.
+    .
     ├── App                     # App folder for Model, View and Controller
     	├── Controllers
     	├── Models
