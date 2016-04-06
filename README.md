@@ -26,6 +26,8 @@ PHP Assessment for Try Catch
 
     .
     ├── build                   # Compiled files (alternatively `dist`)
+        ├── benchmarks          # Load and stress tests
+        ├── benchmarks          # Load and stress tests
     ├── docs                    # Documentation files (alternatively `doc`)
     ├── src                     # Source files (alternatively `lib` or `app`)
     ├── test                    # Automated tests (alternatively `spec` or `tests`)
