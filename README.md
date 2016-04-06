@@ -9,7 +9,7 @@ PHP Assessment for Try Catch
     	├── Models
     	├── Views
     ├── assets                  	# Asset folder for CSV, TXT files
-	├── example.csv			# CSV file
+	├── example.csv				# CSV file
     ├── config                  	# Config folder for Database
     ├── index.php               	# Main page for Web App
     ├── README.md
