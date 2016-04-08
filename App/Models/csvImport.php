@@ -6,14 +6,18 @@ class csvImport {
 	private $header;
 	private $delimiter;
 	private $length;
+	private $parseHeader;
 
 
-	public function __construct($file_name, $delimiter="\t", $length=100) {
+	public function __construct($file_name, $parseHeader=false, $delimiter="\t", $length=100) {
 
 		$this->filename = fopen($file_name, 'r');
     $this->delimiter = $delimiter;
     $this->length = $length;
-		$this->header = fgetcsv($this->filename, $this->length, $this->delimiter);
+
+		if ($this->parseHeader) {
+			$this->header = fgetcsv($this->filename, $this->length, $this->delimiter);
+		}
 	}
 
 	function __destruct() {
