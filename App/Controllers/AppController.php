@@ -2,7 +2,6 @@
 
 class AppController {
 
-  private $uri;
   private $csvFilePath = 'assets/example.csv'; //This can be changed according to the CSV file provided inside the /assets folder
   private $csvTmpFilePath = 'assets/example.tmp';
 
@@ -46,7 +45,7 @@ class AppController {
     if ( file_exists($this->csvFilePath) ) { //File exists validation
 
       $myFile = fopen($this->csvFilePath, "r");
-      $writing = fopen($this->csvTmpFilePath, 'w');
+      $writingTmp = fopen($this->csvTmpFilePath, 'w');
 
       $updateField = $request_body->update ."\n";
       $updateID = $request_body->id;
@@ -60,14 +59,13 @@ class AppController {
           echo $line;
           $line = $updateField;
           $replaced = true;
-
         }
 
-        fputs($writing, $line);
+        fputs($writingTmp, $line);
         $lineNo++;
       }
       fclose($myFile);
-      fclose($writing);
+      fclose($writingTmp);
 
       if ($replaced) {
         rename($this->csvTmpFilePath, $this->csvFilePath);
@@ -89,7 +87,7 @@ class AppController {
     if ( file_exists($this->csvFilePath) ) { //File exists validation
 
       $myFile = fopen($this->csvFilePath, "r");
-      $writing = fopen($this->csvTmpFilePath, 'w');
+      $writingTmp = fopen($this->csvTmpFilePath, 'w');
 
       $deleteID = $request_body->id;
       $lineNo = 0;
@@ -99,7 +97,7 @@ class AppController {
         $line = fgets($myFile);
 
         if ( $lineNo != $deleteID ) {
-          fputs($writing, $line);
+          fputs($writingTmp, $line);
           echo $line;
         } else {
           $replaced = true;
@@ -108,7 +106,7 @@ class AppController {
         $lineNo++;
       }
       fclose($myFile);
-      fclose($writing);
+      fclose($writingTmp);
 
       if ($replaced) {
         rename($this->csvTmpFilePath, $this->csvFilePath);
