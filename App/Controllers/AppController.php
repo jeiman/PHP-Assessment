@@ -4,8 +4,12 @@ class AppController {
 
   private $uri;
 
-  public function getURIValues() {
+  public function create() {
 
+  }
+  
+  public function add() {
+	  
   }
 
   public function update() {
