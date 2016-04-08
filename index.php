@@ -1,25 +1,59 @@
 <?php
 
-// public function __autoload($class) {
-//   require_once 'App/'.$class.'.php';
-// }
+spl_autoload_register( function ($class_name ) {
+
+  $pathControllers = "App/Controllers/{$class_name}.php";
+  $pathViews = "App/Views/{$class_name}.php";
+  $pathModels = "App/Models/{$class_name}.php";
+
+  if ( file_exists($pathControllers) ) {
+       require_once($pathControllers);
+
+   } else if ( file_exists($pathViews) ) {
+     require_once($pathViews);
+
+   } else if ( file_exists ($pathModels)) {
+     require_once($pathModels);
+
+   } else {
+     return;
+   }
+});
 
 
-$myfile = fopen("assets/example.csv", "a+") or die("Unable to open file!");
-$txt = "Singam Jeya,49328498234892,London UK\n";
-fwrite($myfile, $txt);
-//$txt = "Jane Doe,4938928,San Fran 23\n";
-//fwrite($myfile, $txt);
-fclose($myfile);
+$path = '';
+if ( $_SERVER['PATH_INFO'] ) {
+  $path = $_SERVER['PATH_INFO'];
+}
 
-echo '<pre>';
-require_once 'App/Views/viewCSV.php';
+if ($path == '/address') {
 
-// $file="assets/example.csv";
-// $csv= file_get_contents($file);
-// $array = array_map("str_getcsv", explode("\n", $csv));
-// $json = json_encode($array);
-// echo '<pre>';
-// print_r($json);
+$serverReqMethod = $_SERVER['REQUEST_METHOD'];
 
+  switch ($serverReqMethod) {
+
+    case 'POST': //Create
+    $controller = new AppController();
+    $csv = $controller->create();
+    break;
+
+    case 'GET': //Read
+    $controller = new AppController();
+    $csv = $controller->read();
+    break;
+
+    case 'PUT': //Update
+    $controller = new AppController();
+    $csv = $controller->update();
+    break;
+
+    case 'DELETE': //Delete
+    $controller = new AppController();
+    $csv = $controller->delete();
+    break;
+
+    default:
+    echo 'Error finding';
+  }
+}
 ?>
