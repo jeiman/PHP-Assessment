@@ -1,13 +1,13 @@
 <?php
-require_once 'App/Models/csvImport.php';
 
-$csv = new csvImport( 'assets/example.csv' );
-$data = $csv->getDataFromCSV();
-print_r( $data );
+class viewCSV {
 
-echo '<pre>'.json_encode($data) . '</pre>';
+  public function viewData($data) {
+    echo '<pre>';
+    print_r( $data );
+    $data = json_encode($data);
+    return $data;
+  }
+}
 
-// $fp = fopen('assets/results.json', 'w');
-// fwrite($fp, json_encode($data));
-// fclose($fp);
 ?>
